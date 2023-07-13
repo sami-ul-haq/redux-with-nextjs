@@ -1,17 +1,17 @@
 "use client";
 
-import { deleteTodo } from "@/app/redux/features/todoSlice";
+import { deleteTodo, toggleTodo } from "@/app/redux/features/todoSlice";
 import { useDispatch, useSelector } from "react-redux";
 
 const TodoList = () => {
   const { todos } = useSelector((state) => state.todos);
   const dispatch = useDispatch();
-  console.log(todos);
+
   return (
-    <div className="border rounded-md px-2 py-5 mt-10">
+    <div className="border rounded-md px-2 py-5 mt-10 border-slate-500">
       {todos.length ? (
         todos?.map((item) => (
-          <div key={item.id} className="flex items-center justify-between border rounded-md p-2 mb-3 hover:bg-white cursor-pointer" >
+          <div key={item.id} className="flex items-center justify-between border border-slate-500 rounded-md p-2 mb-3 hover:bg-white cursor-pointer" onClick={() => dispatch(toggleTodo(item.id))}>
             <h2 className="text-green-700 font-semibold">{item.text}</h2>
             <span
               onClick={() => dispatch(deleteTodo(item.id))}
